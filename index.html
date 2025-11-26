@@ -253,3 +253,133 @@
 
       <div class="nav-links" role="menubar" aria-hidden="false">
         <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <button class="toggle" aria-label="Toggle dark mode">
+        <span class="icon">🌙</span>
+        <span class="label">Dark Mode</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="about">
+    <div class="intro">
+      <div class="eyebrow">Hello, I'm Amar!</div>
+      <h2>Frontend Developer & Designer</h2>
+      <p>I create beautiful and functional web applications. Passionate about technology and design.</p>
+      <div class="cta-row">
+        <a href="#projects" class="primary-cta">View Projects</a>
+        <a href="#contact" class="secondary-cta">Get in Touch</a>
+      </div>
+      <div class="metrics">
+        <div class="metric">
+          <strong>5+</strong>
+          <span>Years of Experience</span>
+        </div>
+        <div class="metric">
+          <strong>50+</strong>
+          <span>Projects Completed</span>
+        </div>
+        <div class="metric">
+          <strong>100+</strong>
+          <span>Happy Clients</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="avatar-wrap floating">
+        <img src="path/to/your/avatar.jpg" alt="Amar Kumar" class="avatar">
+        <div class="avatar-glow"></div>
+        <div class="avatar-name">Amar Kumar</div>
+        <div class="avatar-role">Frontend Developer</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects">
+    <div class="section-title">
+      <h3>My Projects</h3>
+    </div>
+    <div class="projects-grid">
+      <div class="card">
+        <h4>Project One</h4>
+        <p>Description of the project goes here. Explain what it does and the technologies used.</p>
+      </div>
+      <div class="card">
+        <h4>Project Two</h4>
+        <p>Description of the project goes here. Explain what it does and the technologies used.</p>
+      </div>
+      <div class="card">
+        <h4>Project Three</h4>
+        <p>Description of the project goes here. Explain what it does and the technologies used.</p>
+      </div>
+      <!-- Add more project cards as needed -->
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills">
+    <div class="section-title">
+      <h3>My Skills</h3>
+    </div>
+    <div class="skills">
+      <div class="skill">
+        <div class="name">HTML</div>
+        <div class="bar"><i style="width: 90%;"></i></div>
+      </div>
+      <div class="skill">
+        <div class="name">CSS</div>
+        <div class="bar"><i style="width: 85%;"></i></div>
+      </div>
+      <div class="skill">
+        <div class="name">JavaScript</div>
+        <div class="bar"><i style="width: 80%;"></i></div>
+      </div>
+      <div class="skill">
+        <div class="name">React</div>
+        <div class="bar"><i style="width: 75%;"></i></div>
+      </div>
+      <!-- Add more skills as needed -->
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <div class="section-title">
+      <h3>Contact Me</h3>
+    </div>
+    <div class="contact-card">
+      <div>
+        <strong>Email:</strong> amar.kumar@example.com
+      </div>
+      <div>
+        <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2023 Amar Kumar. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // JavaScript for dark mode toggle
+    const toggleButton = document.querySelector('.toggle');
+    toggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+
+    // Particles.js configuration (if you are using particles.js)
+    particlesJS.load('particles', 'path/to/particles.json', function() {
+      console.log('callback - particles.js config loaded');
+    });
+  </script>
+</body>
+</html>
