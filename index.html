@@ -1,263 +1,572 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Amar Kumar | Portfolio</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Amar Kumar — Portfolio</title>
 
-    <!-- GOOGLE FONT -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Poppins", sans-serif;
-        }
+<style>
+  :root{
+    --bg:#eef5ff;               /* light background */
+    --panel:#ffffffcc;         /* glass panel */
+    --text:#072044;            /* dark navy text */
+    --muted:#64748b;           /* muted text */
+    --accent:#0b69ff;          /* main blue */
+    --accent-2:#60a5fa;        /* secondary blue */
+    --glass-border: rgba(11,105,255,0.12);
+    --card-shadow: 0 6px 20px rgba(11,105,255,0.06);
+    --glass: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(245,250,255,0.5));
+    --glass-blur: 10px;
+    --radius: 14px;
+    --glass-contrast: 1;
+    transition: background .35s ease, color .35s ease;
+  }
 
-        body {
-            background: #ffffff;
-            color: #000;
-            transition: 0.4s;
-        }
+  /* Dark mode variables (applied when body has .dark) */
+  .dark{
+    --bg: #071029; 
+    --panel: rgba(8,18,30,0.6);
+    --text: #e6f0ff;
+    --muted: #94a7c6;
+    --accent: #6ab5ff;
+    --accent-2: #1e90ff;
+    --glass-border: rgba(255,255,255,0.04);
+    --card-shadow: 0 10px 30px rgba(2,8,20,0.6);
+    --glass: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    --glass-blur: 6px;
+  }
 
-        body.dark {
-            background: #0d0d0d;
-            color: #fff;
-        }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    background:var(--bg);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+  }
 
-        header {
-            padding: 20px;
-            background: #e6f0ff;
-            border-bottom: 1px solid #d0e1ff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            transition: 0.4s;
-        }
+  /* --- NAVBAR --- */
+  .nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter: blur(var(--glass-blur));
+    background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.35));
+    border-bottom:1px solid var(--glass-border);
+    transition: background .35s ease, border-color .35s ease, transform .2s ease;
+  }
+  .dark .nav{
+    background: linear-gradient(180deg, rgba(8,18,30,0.6), rgba(8,18,30,0.5));
+  }
+  .nav-inner{
+    max-width:1100px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:14px 20px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .logo{
+    width:44px;height:44px;border-radius:10px;
+    display:grid;place-items:center;
+    background: linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:white;font-weight:800;
+    box-shadow: 0 6px 18px rgba(11,105,255,0.18);
+    transform:translateZ(0);
+  }
+  .brand h1{font-size:1.05rem;margin:0;letter-spacing:0.2px}
+  .brand .subtitle{font-size:0.72rem;color:var(--muted);font-weight:600;margin-top:2px}
 
-        body.dark header {
-            background: #111;
-            border-bottom: 1px solid #333;
-        }
+  .nav-links{
+    display:flex;align-items:center;gap:18px;
+  }
+  .nav-links a{
+    text-decoration:none;color:var(--text);font-weight:600;font-size:0.95rem;
+    padding:8px 12px;border-radius:8px;transition:all .22s;
+  }
+  .nav-links a:hover{background:rgba(11,105,255,0.06);color:var(--accent)}
+  .dark .nav-links a:hover{background:rgba(255,255,255,0.03)}
 
-        header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
+  /* toggle button */
+  .toggle{
+    display:inline-flex;align-items:center;gap:8px;padding:8px;border-radius:999px;
+    background:transparent;border:1px solid var(--glass-border);cursor:pointer;
+  }
+  .toggle .icon{width:18px;height:18px;display:inline-block}
+  .toggle .label{font-weight:700;font-size:0.85rem;color:var(--text)}
 
-        /* Dark Mode Button */
-        #toggleBtn {
-            padding: 8px 18px;
-            border: none;
-            border-radius: 20px;
-            background: #1e90ff;
-            color: #fff;
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: 600;
-        }
+  /* --- HERO --- */
+  .hero{
+    position:relative; overflow:visible;
+    max-width:1100px;margin:30px auto 10px;padding:36px 20px 140px;
+    display:grid;grid-template-columns: 1fr 420px; gap:36px;align-items:center;
+  }
 
-        #toggleBtn:hover {
-            transform: scale(1.07);
-        }
+  /* hero content */
+  .hero .intro{
+    max-width:720px;
+  }
+  .eyebrow{display:inline-block;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:white;padding:8px 12px;border-radius:999px;font-weight:700;font-size:0.8rem;margin-bottom:18px;box-shadow:0 8px 24px rgba(11,105,255,0.08)}
+  .hero h2{font-size:2.4rem;margin:0 0 12px;line-height:1.02}
+  .hero p{color:var(--muted);font-size:1.02rem;margin-bottom:16px}
+  .cta-row{display:flex;gap:12px;align-items:center}
+  .primary-cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:white;padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:700;box-shadow:0 10px 30px rgba(11,105,255,0.12);transition:transform .18s, box-shadow .18s}
+  .primary-cta:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(11,105,255,0.16)}
+  .secondary-cta{background:transparent;border:1px solid var(--glass-border);padding:10px 16px;border-radius:12px;color:var(--text);font-weight:700}
 
-        .hero {
-            text-align: center;
-            padding: 60px 20px;
-            animation: fadeIn 1.5s ease;
-        }
+  /* small metrics */
+  .metrics{display:flex;gap:18px;margin-top:20px}
+  .metric{background:var(--panel);padding:12px;border-radius:12px;box-shadow:var(--card-shadow);border:1px solid var(--glass-border}
+  .metric strong{display:block;font-size:1.05rem}
+  .metric span{font-size:0.85rem;color:var(--muted)}
 
-        /* IMAGE FIXED SIZE */
-        .hero img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #1e90ff;
-            box-shadow: 0 0 20px rgba(30, 144, 255, 0.5);
-            margin-bottom: 20px;
-            animation: float 4s ease-in-out infinite;
-        }
+  /* hero image card (3D floating) */
+  .hero-card{
+    width:100%;
+    perspective:1000px;
+    display:flex;justify-content:center;
+    align-items:center;
+  }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
+  .avatar-wrap{
+    width:320px;height:420px;border-radius:20px;
+    background:var(--panel);
+    padding:18px;
+    box-shadow: var(--card-shadow);
+    border:1px solid var(--glass-border);
+    display:flex;flex-direction:column;align-items:center;gap:14px;
+    transform-style: preserve-3d;
+    transition: transform .35s cubic-bezier(.2,.9,.2,1), box-shadow .35s;
+    position:relative; overflow:visible;
+  }
 
-            50% {
-                transform: translateY(-12px);
-            }
-        }
+  .avatar {
+    width:220px;height:220px;border-radius:999px;object-fit:cover;border:6px solid rgba(255,255,255,0.6);
+    box-shadow: 0 18px 40px rgba(9,38,76,0.12), 0 0 40px rgba(11,105,255,0.09) inset;
+    transform: translateZ(40px) rotateX(0deg);
+  }
 
-        .btn {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 10px 25px;
-            background: #1e90ff;
-            color: #fff;
-            font-weight: 600;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: .3s;
-        }
+  .avatar-glow{
+    position:absolute;left:50%;transform:translateX(-50%);bottom:20%;
+    width:280px;height:280px;border-radius:50%;filter:blur(40px);
+    background: radial-gradient(circle at 30% 30%, rgba(11,105,255,0.32), rgba(96,165,250,0.12), transparent 55%);
+    z-index:-1;
+  }
 
-        .btn:hover {
-            background: #0e72cf;
-            transform: scale(1.05);
-        }
+  .avatar-name{font-weight:800;font-size:1.1rem}
+  .avatar-role{font-size:0.9rem;color:var(--muted)}
 
-        section {
-            padding: 50px 20px;
-            max-width: 1000px;
-            margin: auto;
-        }
+  /* floating animation */
+  @keyframes floaty {
+    0% { transform: translateY(0) rotateZ(-0.3deg) }
+    50% { transform: translateY(-12px) rotateZ(0.3deg) }
+    100% { transform: translateY(0) rotateZ(-0.3deg) }
+  }
+  .avatar-wrap.floating{ animation: floaty 6s ease-in-out infinite; }
 
-        h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            text-align: center;
-            color: #1e90ff;
-        }
+  /* --- PROJECTS / GRID --- */
+  section{
+    max-width:1100px;margin:40px auto;padding:0 20px;
+  }
+  .section-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:18px}
+  .section-title h3{margin:0;font-size:1.25rem}
+  .projects-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;
+  }
+  .card{
+    background:var(--panel);
+    border-radius:12px;padding:18px;border:1px solid var(--glass-border);
+    box-shadow: var(--card-shadow);
+    transition: transform .32s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+    transform-style:preserve-3d;
+  }
+  .card:hover{ transform: translateY(-10px) rotateX(2deg) translateZ(6px); box-shadow: 0 28px 60px rgba(11,105,255,0.08) }
 
-        body.dark h3 {
-            color: #6eb6ff;
-        }
+  .card h4{margin:0 0 8px}
+  .card p{color:var(--muted);font-size:0.95rem}
 
-        /* Projects Grid */
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
+  /* skills */
+  .skills{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .skill{
+    background:transparent;padding:12px;border-radius:10px;border:1px dashed var(--glass-border);
+  }
+  .skill .name{font-weight:700;margin-bottom:8px}
+  .bar{height:12px;background:rgba(11,105,255,0.08);border-radius:999px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:999px;transform-origin:left;transition:width 1.4s cubic-bezier(.2,.9,.2,1)}
 
-        .project-card {
-            background: #f3f7ff;
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px solid #d8e7ff;
-            transition: 0.3s;
-        }
+  /* contact & footer */
+  .contact-card{display:flex;gap:18px;align-items:center;justify-content:space-between;padding:18px;border-radius:12px;background:var(--panel);border:1px solid var(--glass-border);box-shadow:var(--card-shadow)}
+  footer{max-width:1100px;margin:30px auto;padding:18px 20px;color:var(--muted);text-align:center;font-size:0.95rem}
 
-        body.dark .project-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
-        }
+  /* particles canvas overlay under hero but above background */
+  #particles{
+    position:fixed;left:0;top:0;width:100%;height:100%;z-index:0;pointer-events:none;mix-blend-mode:screen;
+  }
 
-        .project-card:hover {
-            transform: translateY(-6px);
-            border-color: #1e90ff;
-            box-shadow: 0 0 12px rgba(30, 144, 255, 0.4);
-        }
+  /* responsive */
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr; padding-bottom:80px}
+    .avatar-wrap{width:300px;height:380px}
+    .brand .subtitle{display:none}
+    .nav-links{display:none}
+  }
 
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #e6f0ff;
-            border-top: 1px solid #d0e1ff;
-            transition: 0.4s;
-        }
+  @media (max-width:520px){
+    .avatar{width:160px;height:160px}
+    .hero h2{font-size:1.6rem}
+    .primary-cta{padding:10px 14px}
+    .metrics{flex-direction:column;gap:10px}
+  }
 
-        body.dark footer {
-            background: #111;
-            border-top: 1px solid #333;
-        }
-
-        a {
-            color: #1e90ff;
-            text-decoration: none;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+</style>
 </head>
+<body class="">
+  <!-- PARTICLES CANVAS -->
+  <canvas id="particles"></canvas>
 
-<body>
-
-    <header>
-        <h1>Amar Kumar</h1>
-        <button id="toggleBtn">Dark Mode</button>
-    </header>
-
-    <section class="hero">
-        <!-- IMAGE ADDED -->
-        <img src="image/IMG_0642.jpeg" alt="My Photo">
-
-        <h2>Welcome to My Portfolio 🚀</h2>
-        <p>I'm a beginner developer exploring Web Development and building cool projects.</p>
-        <a href="#projects" class="btn">View Projects</a>
-    </section>
-
-    <section id="about">
-        <h3>About Me</h3>
-        <p>
-            Hi! I'm Amar Kumar, a passionate learner and developer.
-            I love building creative and responsive websites, exploring new technologies,
-            and continuously improving my skills.
-        </p>
-    </section>
-
-    <section id="projects">
-        <h3>My Projects</h3>
-
-        <div class="projects">
-
-            <div class="project-card">
-                <h4>📌 Project 1</h4>
-                <p>A simple and clean website built with HTML & CSS.</p>
-            </div>
-
-            <div class="project-card">
-                <h4>📌 Project 2</h4>
-                <p>JavaScript based interactive tool with animations.</p>
-            </div>
-
-            <div class="project-card">
-                <h4>📌 Project 3</h4>
-                <p>Responsive portfolio layout for beginners.</p>
-            </div>
-
+  <!-- NAV -->
+  <nav class="nav" role="navigation" aria-label="Main Navigation">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">AK</div>
+        <div>
+          <h1 style="font-size:1rem;margin:0">Amar Kumar</h1>
+          <div class="subtitle">Frontend Developer</div>
         </div>
+      </div>
+
+      <div class="nav-links" role="menubar" aria-hidden="false">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <button class="toggle" id="modeToggle" aria-pressed="false" title="Toggle dark / light mode">
+        <svg class="icon sun" viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" fill="white"></circle>
+        </svg>
+        <span class="label">Light</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero" id="home" role="banner">
+    <div class="intro" style="z-index:2">
+      <div class="eyebrow">Hello — I'm Amar</div>
+      <h2>Building sleek, modern web experiences with clean code and delightful animations.</h2>
+      <p>I craft responsive interfaces, interactive components and polished animations. I love turning ideas into fast, accessible websites.</p>
+
+      <div class="cta-row" style="margin-top:18px">
+        <a class="primary-cta" href="#projects">View Projects</a>
+        <a class="secondary-cta" href="#contact">Hire Me</a>
+      </div>
+
+      <div class="metrics" aria-hidden="true" style="margin-top:22px">
+        <div class="metric">
+          <strong>6+</strong><span>Projects shipped</span>
+        </div>
+        <div class="metric">
+          <strong>1+</strong><span>Years coding</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card" style="z-index:2">
+      <div class="avatar-wrap floating" id="avatarWrap" aria-hidden="false">
+        <div class="avatar-glow" aria-hidden="true"></div>
+        <!-- YOUR IMAGE -->
+        <img class="avatar" src="image/IMG_0642.jpeg" alt="Amar Kumar — profile photo" />
+
+        <div style="text-align:center;margin-top:6px">
+          <div class="avatar-name">Amar Kumar</div>
+          <div class="avatar-role">Frontend Developer</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <main>
+    <section id="about" aria-labelledby="about-title">
+      <div class="section-title">
+        <h3 id="about-title">About Me</h3>
+        <div style="color:var(--muted)">Design-driven. Performance-minded. Detail-oriented.</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 300px;gap:20px;align-items:start">
+        <div class="card" style="padding:22px">
+          <h4>Who am I?</h4>
+          <p>I'm Amar — a frontend developer who loves building beautiful, accessible interfaces with a focus on clarity, performance and interaction. My work combines clean code, deliberate animations and practical UX.</p>
+          <p style="margin-top:12px;color:var(--muted)">Tech stack: HTML • CSS • JavaScript • Git • Responsive Design</p>
+        </div>
+
+        <div class="card" style="padding:18px;display:flex;flex-direction:column;gap:10px;align-items:center">
+          <div style="width:96%;text-align:center">
+            <strong style="display:block">Want my resume?</strong>
+            <p style="color:var(--muted);margin:8px 0 12px">Download a PDF or contact me directly.</p>
+            <a class="primary-cta" href="#contact" style="display:inline-block">Contact</a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="contact">
-        <h3>Contact Me</h3>
-        <p>Email: <a href="mailto:youremail@gmail.com">youremail@gmail.com</a></p>
-        <p>GitHub: <a href="https://github.com/" target="_blank">github.com/yourusername</a></p>
+    <!-- PROJECTS -->
+    <section id="projects" aria-labelledby="projects-title">
+      <div class="section-title">
+        <h3 id="projects-title">Selected Projects</h3>
+        <div style="color:var(--muted)">Glass cards, 3D hover & subtle motion.</div>
+      </div>
+
+      <div class="projects-grid">
+        <article class="card">
+          <h4>Portfolio Website</h4>
+          <p>Responsive portfolio with advanced animations, accessibility and smooth interactions.</p>
+        </article>
+
+        <article class="card">
+          <h4>Interactive Widget</h4>
+          <p>Custom JS widget with stateful controls and animated microinteractions.</p>
+        </article>
+
+        <article class="card">
+          <h4>Landing Page</h4>
+          <p>Conversion-focused landing with hero animations and optimized loading.</p>
+        </article>
+      </div>
     </section>
 
-    <footer>
-        ©️ 2025 Amar Kumar | All Rights Reserved
-    </footer>
+    <!-- SKILLS -->
+    <section id="skills" aria-labelledby="skills-title">
+      <div class="section-title">
+        <h3 id="skills-title">Skills</h3>
+        <div style="color:var(--muted)">Progress bars animate on load.</div>
+      </div>
 
-    <script>
-        const btn = document.getElementById("toggleBtn");
-        btn.addEventListener("click", () => {
-            document.body.classList.toggle("dark");
+      <div class="skills">
+        <div class="skill">
+          <div class="name">HTML</div>
+          <div class="bar"><i data-percent="95"></i></div>
+        </div>
 
-            if (document.body.classList.contains("dark")) {
-                btn.textContent = "Light Mode";
-            } else {
-                btn.textContent = "Dark Mode";
-            }
-        });
-    </script>
+        <div class="skill">
+          <div class="name">CSS</div>
+          <div class="bar"><i data-percent="92"></i></div>
+        </div>
 
+        <div class="skill">
+          <div class="name">JavaScript</div>
+          <div class="bar"><i data-percent="85"></i></div>
+        </div>
+
+        <div class="skill">
+          <div class="name">React (learning)</div>
+          <div class="bar"><i data-percent="70"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-title" style="margin-bottom:30px">
+      <div class="section-title">
+        <h3 id="contact-title">Contact</h3>
+        <div style="color:var(--muted)">Let's build something great.</div>
+      </div>
+
+      <div class="contact-card">
+        <div>
+          <strong>Get in touch</strong>
+          <p style="color:var(--muted);margin:6px 0">Email: <a href="mailto:youremail@gmail.com">youremail@gmail.com</a></p>
+        </div>
+
+        <div style="display:flex;gap:10px;align-items:center">
+          <a class="secondary-cta" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+          <a class="secondary-cta" href="#" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    ©️ <span id="year"></span> Amar Kumar • Built with care.
+  </footer>
+
+<script>
+/* -------------------------
+   Theme toggling (light/dark)
+   - default: light-blue theme
+   - clicking toggles body.dark
+--------------------------*/
+const modeToggle = document.getElementById('modeToggle');
+const body = document.body;
+const label = modeToggle.querySelector('.label');
+
+function setMode(isDark){
+  if(isDark){
+    body.classList.add('dark');
+    label.textContent = 'Dark';
+    modeToggle.setAttribute('aria-pressed','true');
+  } else {
+    body.classList.remove('dark');
+    label.textContent = 'Light';
+    modeToggle.setAttribute('aria-pressed','false');
+  }
+  // save preference
+  try { localStorage.setItem('prefers-dark', isDark ? '1' : '0'); } catch(e){}
+}
+
+// initialize from storage or system preference
+(function initMode(){
+  let saved = null;
+  try { saved = localStorage.getItem('prefers-dark'); } catch(e){}
+  if(saved === '1') setMode(true);
+  else if(saved === '0') setMode(false);
+  else {
+    // detect system dark mode
+    const prefers = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setMode(prefers);
+  }
+})();
+
+modeToggle.addEventListener('click', ()=>{
+  setMode(!body.classList.contains('dark'));
+});
+
+/* -------------------------
+   Avatar tilt based on mouse move
+--------------------------*/
+const avatarWrap = document.getElementById('avatarWrap');
+
+(function avatarInteractive(){
+  let wrap = avatarWrap;
+  if(!wrap) return;
+  wrap.addEventListener('pointermove', (e)=>{
+    const r = wrap.getBoundingClientRect();
+    const cx = r.left + r.width/2;
+    const cy = r.top + r.height/2;
+    const dx = e.clientX - cx;
+    const dy = e.clientY - cy;
+    const rx = (-dy / r.height) * 12; // rotate X
+    const ry = (dx / r.width) * 12;   // rotate Y
+    wrap.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(8px)`;
+  });
+  wrap.addEventListener('pointerleave', ()=>{
+    wrap.style.transform = '';
+  });
+})();
+
+/* -------------------------
+   Skill bars animation
+--------------------------*/
+function animateSkills(){
+  const els = document.querySelectorAll('.bar > i');
+  els.forEach((el, idx)=>{
+    const pct = el.getAttribute('data-percent') || 0;
+    setTimeout(()=>{ el.style.width = pct + '%'; }, 150 + idx*120);
+  });
+}
+window.addEventListener('load', animateSkills);
+
+/* -------------------------
+   Simple parallax on scroll for hero
+--------------------------*/
+const hero = document.querySelector('.hero');
+window.addEventListener('scroll', ()=>{
+  const sc = window.scrollY;
+  if(hero){
+    hero.style.transform = `translateY(${sc * 0.02}px)`;
+  }
+});
+
+/* -------------------------
+   Simple particle system (canvas)
+--------------------------*/
+(function particles(){
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let w = canvas.width = innerWidth;
+  let h = canvas.height = innerHeight;
+  let particles = [];
+  const count = Math.round((w*h) / 65000) + 20; // scale with screen
+
+  function rand(min,max){ return Math.random()*(max-min)+min; }
+
+  function make(){
+    particles = [];
+    for(let i=0;i<count;i++){
+      particles.push({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        r: rand(0.6,2.6),
+        vx: rand(-0.25,0.25),
+        vy: rand(-0.05,0.15),
+        alpha: rand(0.06,0.22)
+      });
+    }
+  }
+
+  function resize(){
+    w = canvas.width = innerWidth;
+    h = canvas.height = innerHeight;
+    make();
+  }
+
+  function step(){
+    ctx.clearRect(0,0,w,h);
+    for(let p of particles){
+      p.x += p.vx;
+      p.y += p.vy;
+      if(p.x > w+10) p.x = -10;
+      if(p.x < -10) p.x = w+10;
+      if(p.y > h+10) p.y = -10;
+      // draw soft circle
+      ctx.beginPath();
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*12);
+      if(document.body.classList.contains('dark')){
+        g.addColorStop(0, `rgba(106,179,255,${p.alpha})`);
+        g.addColorStop(1, `rgba(11,31,52,0)`);
+      } else {
+        g.addColorStop(0, `rgba(11,105,255,${p.alpha})`);
+        g.addColorStop(1, `rgba(230,245,255,0)`);
+      }
+      ctx.fillStyle = g;
+      ctx.arc(p.x,p.y,p.r*8,0,Math.PI*2);
+      ctx.fill();
+    }
+    requestAnimationFrame(step);
+  }
+
+  window.addEventListener('resize', resize);
+  make();
+  step();
+})();
+
+/* -------------------------
+   Year in footer
+--------------------------*/
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* -------------------------
+   Small preference: remove floating animation when user prefers reduced motion
+--------------------------*/
+const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(prefersReduced){
+  const f = document.querySelectorAll('.floating');
+  f.forEach(el=> el.classList.remove('floating'));
+  document.documentElement.style.scrollBehavior = 'auto';
+}
+</script>
 </body>
-
 </html>
