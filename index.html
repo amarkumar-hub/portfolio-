@@ -1,1 +1,169 @@
-my name is amar kumar
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aman Singh | Portfolio</title>
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background: #0d0d0d;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+            background: #111;
+            border-bottom: 1px solid #333;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 25px;
+            background: #06d6a0;
+            color: #000;
+            font-weight: 600;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        .btn:hover {
+            background: #04b786;
+        }
+
+        section {
+            padding: 50px 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            transition: .3s;
+            border: 1px solid #333;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #06d6a0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+            border-top: 1px solid #333;
+            margin-top: 30px;
+        }
+
+        a {
+            color: #06d6a0;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Aman Singh</h1>
+    </header>
+
+    <section class="hero">
+        <h2>Welcome to My Portfolio 🚀</h2>
+        <p>I'm a beginner developer exploring Web Development and building cool projects.</p>
+        <a href="#projects" class="btn">View Projects</a>
+    </section>
+
+    <section id="about">
+        <h3>About Me</h3>
+        <p>
+            Hi! I'm Aman Singh, a passionate learner and developer.  
+            I love building creative and responsive websites, exploring new technologies,
+            and continuously improving my skills.
+        </p>
+    </section>
+
+    <section id="projects">
+        <h3>My Projects</h3>
+
+        <div class="projects">
+
+            <div class="project-card">
+                <h4>📌 Project 1</h4>
+                <p>A simple and clean website built with HTML & CSS.</p>
+            </div>
+
+            <div class="project-card">
+                <h4>📌 Project 2</h4>
+                <p>JavaScript based interactive tool with animations.</p>
+            </div>
+
+            <div class="project-card">
+                <h4>📌 Project 3</h4>
+                <p>Responsive portfolio layout for beginners.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact">
+        <h3>Contact Me</h3>
+        <p>Email: <a href="mailto:youremail@gmail.com">youremail@gmail.com</a></p>
+        <p>GitHub: <a href="https://github.com/" target="_blank">github.com/yourusername</a></p>
+    </section>
+
+    <footer>
+        © 2025 Aman Singh | All Rights Reserved
+    </footer>
+
+</body>
+</html>
