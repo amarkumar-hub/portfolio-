@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Amar kumar | Portfolio</title>
+    <title>Amar Kumar | Portfolio</title>
 
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -17,87 +18,98 @@
         }
 
         body {
-            background: #0d0d0d;
-            color: #fff;
-            line-height: 1.6;
-            transition: 0.3s;
+            background: #ffffff;
+            color: #000;
+            transition: 0.4s;
         }
 
-        body.light {
-            background: #f4f4f4;
-            color: #000;
+        body.dark {
+            background: #0d0d0d;
+            color: #fff;
         }
 
         header {
             padding: 20px;
-            background: #111;
-            border-bottom: 1px solid #333;
+            background: #e6f0ff;
+            border-bottom: 1px solid #d0e1ff;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            transition: 0.4s;
         }
 
-        body.light header {
-            background: #fff;
-            border-color: #ccc;
+        body.dark header {
+            background: #111;
+            border-bottom: 1px solid #333;
         }
 
         header h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
         }
 
-        /* TOGGLE BUTTON */
-        .toggle-btn {
+        /* Dark Mode Button */
+        #toggleBtn {
             padding: 8px 18px;
-            background: #06d6a0;
-            color: #000;
-            font-weight: 600;
-            border-radius: 5px;
-            cursor: pointer;
             border: none;
+            border-radius: 20px;
+            background: #1e90ff;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: 600;
         }
 
-        .toggle-btn:hover {
-            opacity: 0.9;
+        #toggleBtn:hover {
+            transform: scale(1.07);
         }
 
         .hero {
             text-align: center;
             padding: 60px 20px;
+            animation: fadeIn 1.5s ease;
         }
 
+        /* IMAGE FIXED SIZE */
         .hero img {
             width: 180px;
             height: 180px;
             border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1e90ff;
+            box-shadow: 0 0 20px rgba(30, 144, 255, 0.5);
             margin-bottom: 20px;
-            border: 3px solid #06d6a0;
+            animation: float 4s ease-in-out infinite;
         }
 
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: #ccc;
-        }
-
-        body.light .hero p {
-            color: #333;
+            50% {
+                transform: translateY(-12px);
+            }
         }
 
         .btn {
             display: inline-block;
             margin-top: 25px;
             padding: 10px 25px;
-            background: #06d6a0;
-            color: #000;
+            background: #1e90ff;
+            color: #fff;
             font-weight: 600;
             border-radius: 5px;
             text-decoration: none;
+            transition: .3s;
+        }
+
+        .btn:hover {
+            background: #0e72cf;
+            transform: scale(1.05);
         }
 
         section {
@@ -110,8 +122,14 @@
             font-size: 1.8rem;
             margin-bottom: 20px;
             text-align: center;
+            color: #1e90ff;
         }
 
+        body.dark h3 {
+            color: #6eb6ff;
+        }
+
+        /* Projects Grid */
         .projects {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -119,39 +137,52 @@
         }
 
         .project-card {
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            transition: .3s;
+            background: #f3f7ff;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #d8e7ff;
+            transition: 0.3s;
         }
 
-        body.light .project-card {
-            background: #fff;
-            border-color: #ccc;
+        body.dark .project-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
         }
 
         .project-card:hover {
-            transform: translateY(-5px);
-            border-color: #06d6a0;
+            transform: translateY(-6px);
+            border-color: #1e90ff;
+            box-shadow: 0 0 12px rgba(30, 144, 255, 0.4);
         }
 
         footer {
             text-align: center;
             padding: 20px;
-            background: #111;
-            border-top: 1px solid #333;
-            margin-top: 30px;
+            background: #e6f0ff;
+            border-top: 1px solid #d0e1ff;
+            transition: 0.4s;
         }
 
-        body.light footer {
-            background: #fff;
-            border-color: #ccc;
+        body.dark footer {
+            background: #111;
+            border-top: 1px solid #333;
         }
 
         a {
-            color: #06d6a0;
+            color: #1e90ff;
             text-decoration: none;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -159,13 +190,13 @@
 <body>
 
     <header>
-        <h1>Amar kumar</h1>
-        <button class="toggle-btn" onclick="toggleMode()">Dark Mode</button>
+        <h1>Amar Kumar</h1>
+        <button id="toggleBtn">Dark Mode</button>
     </header>
 
     <section class="hero">
-        <!-- ⭐ YOUR IMAGE HERE ⭐ -->
-        <img src="image/IMG_0642.jpeg" alt="Profile Image">
+        <!-- IMAGE ADDED -->
+        <img src="image/IMG_0642.jpeg" alt="My Photo">
 
         <h2>Welcome to My Portfolio 🚀</h2>
         <p>I'm a beginner developer exploring Web Development and building cool projects.</p>
@@ -175,7 +206,7 @@
     <section id="about">
         <h3>About Me</h3>
         <p>
-            Hi! I'm Amar kumar, a passionate learner and developer.  
+            Hi! I'm Amar Kumar, a passionate learner and developer.
             I love building creative and responsive websites, exploring new technologies,
             and continuously improving my skills.
         </p>
@@ -211,21 +242,22 @@
     </section>
 
     <footer>
-        © 2025 Amar kumar | All Rights Reserved
+        ©️ 2025 Amar Kumar | All Rights Reserved
     </footer>
 
     <script>
-        function toggleMode() {
-            document.body.classList.toggle("light");
+        const btn = document.getElementById("toggleBtn");
+        btn.addEventListener("click", () => {
+            document.body.classList.toggle("dark");
 
-            const btn = document.querySelector(".toggle-btn");
-            if (document.body.classList.contains("light")) {
-                btn.innerText = "Light Mode";
+            if (document.body.classList.contains("dark")) {
+                btn.textContent = "Light Mode";
             } else {
-                btn.innerText = "Dark Mode";
+                btn.textContent = "Dark Mode";
             }
-        }
+        });
     </script>
 
 </body>
+
 </html>
