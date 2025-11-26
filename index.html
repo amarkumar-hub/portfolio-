@@ -20,13 +20,26 @@
             background: #0d0d0d;
             color: #fff;
             line-height: 1.6;
+            transition: 0.3s;
+        }
+
+        body.light {
+            background: #f4f4f4;
+            color: #000;
         }
 
         header {
             padding: 20px;
-            text-align: center;
             background: #111;
             border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        body.light header {
+            background: #fff;
+            border-color: #ccc;
         }
 
         header h1 {
@@ -34,9 +47,32 @@
             font-weight: 700;
         }
 
+        /* TOGGLE BUTTON */
+        .toggle-btn {
+            padding: 8px 18px;
+            background: #06d6a0;
+            color: #000;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .toggle-btn:hover {
+            opacity: 0.9;
+        }
+
         .hero {
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px;
+        }
+
+        .hero img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid #06d6a0;
         }
 
         .hero h2 {
@@ -49,6 +85,10 @@
             color: #ccc;
         }
 
+        body.light .hero p {
+            color: #333;
+        }
+
         .btn {
             display: inline-block;
             margin-top: 25px;
@@ -58,11 +98,6 @@
             font-weight: 600;
             border-radius: 5px;
             text-decoration: none;
-            transition: .3s;
-        }
-
-        .btn:hover {
-            background: #04b786;
         }
 
         section {
@@ -87,8 +122,13 @@
             background: #1a1a1a;
             padding: 20px;
             border-radius: 8px;
-            transition: .3s;
             border: 1px solid #333;
+            transition: .3s;
+        }
+
+        body.light .project-card {
+            background: #fff;
+            border-color: #ccc;
         }
 
         .project-card:hover {
@@ -104,6 +144,11 @@
             margin-top: 30px;
         }
 
+        body.light footer {
+            background: #fff;
+            border-color: #ccc;
+        }
+
         a {
             color: #06d6a0;
             text-decoration: none;
@@ -115,9 +160,13 @@
 
     <header>
         <h1>Amar kumar</h1>
+        <button class="toggle-btn" onclick="toggleMode()">Dark Mode</button>
     </header>
 
     <section class="hero">
+        <!-- ⭐ YOUR IMAGE HERE ⭐ -->
+        <img src="image/IMG_0642.jpeg" alt="Profile Image">
+
         <h2>Welcome to My Portfolio 🚀</h2>
         <p>I'm a beginner developer exploring Web Development and building cool projects.</p>
         <a href="#projects" class="btn">View Projects</a>
@@ -164,6 +213,19 @@
     <footer>
         © 2025 Amar kumar | All Rights Reserved
     </footer>
+
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle("light");
+
+            const btn = document.querySelector(".toggle-btn");
+            if (document.body.classList.contains("light")) {
+                btn.innerText = "Light Mode";
+            } else {
+                btn.innerText = "Dark Mode";
+            }
+        }
+    </script>
 
 </body>
 </html>
