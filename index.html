@@ -2,86 +2,109 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Amar Kumar — Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portfolio</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --bg:#eef5ff;               /* light background */
-    --panel:#ffffffcc;         /* glass panel */
-    --text:#072044;            /* dark navy text */
-    --muted:#64748b;           /* muted text */
-    --accent:#0b69ff;          /* main blue */
-    --accent-2:#60a5fa;        /* secondary blue */
-    --glass-border: rgba(11,105,255,0.12);
-    --card-shadow: 0 6px 20px rgba(11,105,255,0.06);
-    --glass: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(245,250,255,0.5));
-    --glass-blur: 10px;
-    --radius: 14px;
-    --glass-contrast: 1;
-    transition: background .35s ease, color .35s ease;
+  /* Light Mode Variables */
+  :root {
+    --bg: #eef5ff;
+    --panel: rgba(255,255,255,0.6);
+    --text: #071029;
+    --muted: #526282;
+    --accent: #1e90ff;
+    --accent-2: #0077ff;
+    --glass-border: rgba(0,0,0,0.08);
+    --card-shadow: 0 10px 30px rgba(10,30,60,0.1);
+    --glass: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.3));
+    --glass-blur: 6px;
   }
 
-  <button class="theme-toggle" id="themeBtn">
+  /* Dark Mode Variables */
+  .dark {
+    --bg: #071029; 
+    --panel: rgba(8,18,30,0.6);
+    --text: #e6f0ff;
+    --muted: #94a7c6;
+    --accent: #6ab5ff;
+    --accent-2: #1e90ff;
+    --glass-border: rgba(255,255,255,0.04);
+    --card-shadow: 0 10px 30px rgba(2,8,20,0.6);
+    --glass: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  }
+
+  * {box-sizing:border-box;}
+  html, body {height:100%;}
+
+  body {
+    margin:0;
+    font-family:"Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    background:var(--bg);
+    color:var(--text);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* Theme Toggle Button */
+  .theme-toggle{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--panel);
+    backdrop-filter: blur(6px);
+    padding: 10px 16px;
+    border-radius: 50px;
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: var(--text);
+    font-weight: 600;
+    box-shadow: var(--card-shadow);
+    transition: 0.3s ease;
+    z-index: 999;
+  }
+
+  .theme-toggle:hover{
+    transform: scale(1.05);
+  }
+
+  .theme-toggle .icon{
+    font-size: 18px;
+  }
+
+  /* Example content */
+  .container{
+    padding: 80px 20px;
+    text-align:center;
+  }
+  h1{
+    font-size: 42px;
+    font-weight: 700;
+  }
+  p{
+    font-size:18px;
+    color: var(--muted);
+  }
+</style>
+</head>
+
+<body>
+
+<!-- THEME BUTTON -->
+<button class="theme-toggle" id="themeBtn">
   <span class="icon" id="themeIcon">🌙</span>
   <span id="themeText">Dark Mode</span>
 </button>
-/* Light Mode Variables */
-:root {
-  --bg: #eef5ff;
-  --panel: rgba(255,255,255,0.6);
-  --text: #071029;
-  --muted: #526282;
-  --accent: #1e90ff;
-  --accent-2: #0077ff;
-  --glass-border: rgba(0,0,0,0.08);
-  --card-shadow: 0 10px 30px rgba(10,30,60,0.1);
-  --glass: linear-gradient(135deg, rgba(255,255,255,0.5), rgba(255,255,255,0.3));
-  --glass-blur: 6px;
-}
 
-/* Dark Mode Variables */
-.dark {
-  --bg: #071029; 
-  --panel: rgba(8,18,30,0.6);
-  --text: #e6f0ff;
-  --muted: #94a7c6;
-  --accent: #6ab5ff;
-  --accent-2: #1e90ff;
-  --glass-border: rgba(255,255,255,0.04);
-  --card-shadow: 0 10px 30px rgba(2,8,20,0.6);
-  --glass: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-}
+<!-- SAMPLE CONTENT -->
+<div class="container">
+  <h1>Welcome to My Portfolio</h1>
+  <p>This is a sample text. You can replace with your content.</p>
+</div>
 
-/* Theme Toggle Button */
-.theme-toggle{
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: var(--panel);
-  backdrop-filter: blur(6px);
-  padding: 10px 16px;
-  border-radius: 50px;
-  border: 1px solid var(--glass-border);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  color: var(--text);
-  font-weight: 600;
-  box-shadow: var(--card-shadow);
-  transition: 0.3s ease;
-}
-
-.theme-toggle:hover{
-  transform: scale(1.05);
-}
-
-.theme-toggle .icon{
-  font-size: 18px;
-}
 <script>
   const body = document.body;
   const btn = document.getElementById("themeBtn");
@@ -92,14 +115,18 @@
     body.classList.toggle("dark");
 
     if(body.classList.contains("dark")){
-      icon.textContent = "☀️";        // Sun
+      icon.textContent = "☀️";      // Sun
       text.textContent = "Light Mode";
     } else {
-      icon.textContent = "🌙";        // Moon
+      icon.textContent = "🌙";      // Moon
       text.textContent = "Dark Mode";
     }
   });
 </script>
+
+</body>
+</html>
+
 
 
   /* --- NAVBAR --- */
